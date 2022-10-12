@@ -1,147 +1,121 @@
-from juego import Stack
-from juego import *
+import os
+
+gw = False
+
+def cls():
+    os.system('cls')
 
 
-from random import randint
-# Class stack (for each column)
-class Stack:
-    def __init__(self):
-        self._list = []
-    
-    def __len__(self):
-        return len(self._list)    
-    
-    def push(self, element):
-        if len(self._list) <= 6:
-            self._list.append(element)
-        else:
-            return
-    
-    def peek(self):
-        return self._list[-1]
-# Initialize board (empty)
-def initBoard():
-    # empty board
-    rows = ['a','b','c','d','e','f']
-    board = []
-    for i in range(0,len(rows)):
-        board.append([' '] * 7)
-    
-    return board
-# Initialize Stacks (empty
-def initStacks():
-    S = [ Stack(), Stack(), Stack(), 
-         Stack(), Stack(), Stack(), Stack() ]
-    return S
-# print board
-def printBoard(board):
-    rows = ['a','b','c','d','e','f']
-    top = '    1   2   3   4   5   6   7   '
-    row = [[n] for n in range(0,7)]
-    row[0][0] = 'f | '
-    row[1][0] = 'e | '
-    row[2][0] = 'd | '
-    row[3][0] = 'c | '
-    row[4][0] = 'b | '
-    row[5][0] = 'a | '
-    print('')
-    print('  ' + '-'*(len(top)-3))
-    for j in range(0,len(rows)):
-        for i in range(1,8):
-            row[j][0] = row[j][0] + str(board[j][i-1]) + ' | '
-        print(row[j][0])
-        print('  ' + '-'*((len(row[j][0])-3)))
-    print(top)
-    print('')
-    
-# Move
-def move(piece, board, Stacks, computer):
-    Set0 = {'1','2','3','4','5','6','7'}
-    if piece == computer:
-        pos = randint(1,7)
-        if len(Stacks[pos-1]) < 6:
-            Stacks[pos-1].push(piece)
-            board[6-len(Stacks[pos-1])][pos-1] = \
-                Stacks[pos-1].peek()
-        else:
-            move(piece, board, Stacks, computer)
-    else:
-        pos = str(input('Your move: '))
-        if (pos in Set0) == False:
-            print('Input must be integer between 1 and 7')
-            move(piece, board, Stacks, computer)
-        else: 
-            pos = int(pos)
-            if len(Stacks[pos-1]) < 6:
-                Stacks[pos-1].push(piece)
-                board[6-len(Stacks[pos-1])][pos-1] = \
-                    Stacks[pos-1].peek()
-            else:
-                print('Column full, try again...')
-                move(piece, board, Stacks, computer)
-    return board, Stacks
-# Check wins
-def checkWin(S,board):
-    game = False   
-    # Horizontal checker
-    for j in range(0,6):
-        for i in range(3,7):
-            if (board[j][i]==board[j][i-1]==\
-                board[j][i-2]==board[j][i-3]==S):
-                    game = True
-            else:
-                continue   
-    # Vertical checker
-    for i in range(0,7):
-        for j in range(3,6):
-            if (board[j][i]==board[j-1][i]==\
-                board[j-2][i]==board[j-3][i]==S):
-                    game = True
-            else:
-                continue
-    # Diagonal checker
-    for i in range(0,4):
-        for j in range(0,3):
-            if (board[j][i]==board[j+1][i+1]==\
-                board[j+2][i+2]==board[j+3][i+3]==S or
-                board[j+3][i]==board[j+2][i+1]==\
-                board[j+1][i+2]==board[j][i+3]==S):
-                    game = True
-            else:
-                continue
-    if game == True:
-        print(S + ' wins!')
-    return game
-# Main program
-def main():
-    # Prompt player input
-    player1 = str( input('Choose X or O: ') )
-    if player1 != 'X' and player1 != 'O':
-        player1 = str( input('Choose X or O: ') )
-    if player1 == 'X':
-        computer1 = 'O'
-    else:
-        computer1 = 'X'
-        
-    # Print board
-    board = initBoard()
-    Stacks = initStacks()
-    printBoard(board)
+#Validar 4 en linea por columna
 
-    game = False
-    while game == False:
-        # X player
-        board, Stacks = move('X',board,Stacks,computer1)
-        printBoard(board)
-        game = checkWin('X',board)
-        if game == True:
+
+def columna_check():
+
+    for fila in range(6):
+        xcount = 0
+        for columna in range(5):
+            if (grid[columna][fila] == "X"):
+                xcount += 1
+        if xcount == 4:
+            xw()
+    for fila in range(6):
+        ocount = 0
+        for columna in range(5):
+            if (grid[columna][fila] == "O"):
+                ocount += 1
+        if ocount == 4:
+            ow()
+#Validacion 4 en linea por fila
+def fila_check():
+    for columna in range(5):
+        xcount = 0
+        for fila in range(6):
+            if (grid[columna][fila] == "X"):
+                xcount += 1
+            if xcount == 4:
+                xw()
+    for columna in range(5):
+        ocount = 0
+        for fila in range(6):
+            if (grid[columna][fila] == "O"):
+                ocount += 1
+            if ocount == 4:
+                ow()
+#validar todo
+def check_all():
+    columna_check()
+    fila_check()
+
+
+#validacion ganador e imprime pantalla
+
+def prints():
+    cls()
+    check_all()
+    for x in range(5):
+        print(*grid[x], sep=" | ")
+    for x in range(2):
+        print(*info[x], sep=" | ")
+
+#Separador
+def printsespacios():
+    for x in range(3):
+        print("")
+
+#Gana O
+
+def ow():
+    cls()
+    printsespacios()
+    print("O, Wins!".center(16))
+    printsespacios()
+    gw = True
+
+# Gana X
+def xw():
+    cls()
+    printsespacios()
+    print("X, Wins!".center(16))
+    printsespacios()
+    gw = True
+
+#Tablero
+
+grid = [['.', '.', '.', '.', '.', '.'],
+        ['.', '.', '.', '.', '.', '.'],
+        ['.', '.', '.', '.', '.', '.'],
+        ['.', '.', '.', '.', '.', '.'],
+        ['.', '.', '.', '.', '.', '.']]
+info = [['==+===+===+===+===+=='],
+        ['1', '2', '3', '4', '5', '6']]
+
+class Sudoku():
+
+    while True:
+        if gw == True:
             break
-# O player
-        board, Stacks = move('O',board,Stacks,computer1)
-        printBoard(board)
-        game = checkWin('O',board)
-        if game == True:
-            break
-    print('Good game.')
-if __name__ == '__main__':
-    main()
+        else:
+            prints()
+            fila = int(input("X, column: "))
+            fila -= 1
+            if 0 > fila or fila > 6:
+                continue
+            else:
+                for x in range(4, -1, -1):
+                    if grid[x][fila] == '.':
+                       grid[x][fila] = 'X'
+                       break
+            prints()
+            fila = int(input("O, column: "))
+            fila -= 1
+            if 0 > fila or fila > 6:
+                continue
+            else:
+                for x in range(4, -1, -1):
+                    if grid[x][fila] == '.':
+                       grid[x][fila] = 'O'
+                       break
+
+if __name__=='__main__':
+    Sudoku
+  
