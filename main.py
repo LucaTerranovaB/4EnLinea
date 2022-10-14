@@ -25,9 +25,9 @@ class Grafics():
         cls()
         Check.check_all()
         for x in range(5):
-            print(*self._grid[x], sep=" | ")
+            print(*Grafics.grid[x], sep=" | ")
         for x in range(2):
-            print(*self._info[x], sep=" | ")
+            print(*Grafics.info[x], sep=" | ")
 
 #Separador
     def printsespacios(self):
@@ -36,7 +36,7 @@ class Grafics():
 
 
 
-class Check(Grafics):
+class Check():
 
     def __init__(self,fila,columna,xcount,ocount):
 
@@ -50,14 +50,14 @@ class Check(Grafics):
         for self._fila in range(6):
             self._xcount = 0
             for self._columna in range(5):
-                if (self._grid[self._columna][self._fila] == "X"):
+                if (Grafics.grid[self._columna][self._fila] == "X"):
                     self._xcount += 1
             if self._xcount == 4:
                 GanaPierde.xw()
         for self._fila in range(6):
             self._ocount = 0
             for self._columna in range(5):
-                if (self._grid[self._columna][self._fila] == "O"):
+                if (Grafics.grid[self._columna][self._fila] == "O"):
                     self._ocount += 1
             if self._ocount == 4:
                 GanaPierde.ow()
@@ -66,14 +66,14 @@ class Check(Grafics):
         for self._columna in range(5):
             self._xcount = 0
             for self._fila in range(6):
-                if (self._grid[self._columna][self._fila] == "X"):
+                if (Grafics.grid[self._columna][self._fila] == "X"):
                     self._xcount += 1
                 if self._xcount == 4:
                     GanaPierde.xw()
         for self._columna in range(5):
             self._ocount = 0
             for self._fila in range(6):
-                if (self._grid[self._columna][self._fila] == "O"):
+                if (Grafics.grid[self._columna][self._fila] == "O"):
                     self._ocount += 1
                 if self._ocount == 4:
                     GanaPierde.ow()
