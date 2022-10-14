@@ -8,113 +8,136 @@ def cls():
 
 #Validar 4 en linea por columna
 
+class Grafics():
+    
 
-def columna_check():
-
-    for fila in range(6):
-        xcount = 0
-        for columna in range(5):
-            if (grid[columna][fila] == "X"):
-                xcount += 1
-        if xcount == 4:
-            xw()
-    for fila in range(6):
-        ocount = 0
-        for columna in range(5):
-            if (grid[columna][fila] == "O"):
-                ocount += 1
-        if ocount == 4:
-            ow()
-#Validacion 4 en linea por fila
-def fila_check():
-    for columna in range(5):
-        xcount = 0
-        for fila in range(6):
-            if (grid[columna][fila] == "X"):
-                xcount += 1
-            if xcount == 4:
-                xw()
-    for columna in range(5):
-        ocount = 0
-        for fila in range(6):
-            if (grid[columna][fila] == "O"):
-                ocount += 1
-            if ocount == 4:
-                ow()
-#validar todo
-def check_all():
-    columna_check()
-    fila_check()
-
-
+    grid = [['.', '.', '.', '.', '.', '.'],
+            ['.', '.', '.', '.', '.', '.'],
+            ['.', '.', '.', '.', '.', '.'],
+            ['.', '.', '.', '.', '.', '.'],
+            ['.', '.', '.', '.', '.', '.']]
+    info = [['==+===+===+===+===+=='],
+            ['1', '2', '3', '4', '5', '6']]
+        
 #validacion ganador e imprime pantalla
-
-def prints():
-    cls()
-    check_all()
-    for x in range(5):
-        print(*grid[x], sep=" | ")
-    for x in range(2):
-        print(*info[x], sep=" | ")
+    
+    def prints(self):
+        cls()
+        Check.check_all()
+        for x in range(5):
+            print(*self._grid[x], sep=" | ")
+        for x in range(2):
+            print(*self._info[x], sep=" | ")
 
 #Separador
-def printsespacios():
-    for x in range(3):
-        print("")
+    def printsespacios(self):
+        for x in range(3):
+            print("")
+
+
+
+class Check(Grafics):
+
+    def __init__(self,fila,columna,xcount,ocount):
+
+        self._fila = fila
+        self._columna = columna 
+        self._xcount = xcount
+        self._ocount = ocount
+
+    def columna_check(self):
+
+        for self._fila in range(6):
+            self._xcount = 0
+            for self._columna in range(5):
+                if (self._grid[self._columna][self._fila] == "X"):
+                    self._xcount += 1
+            if self._xcount == 4:
+                GanaPierde.xw()
+        for self._fila in range(6):
+            self._ocount = 0
+            for self._columna in range(5):
+                if (self._grid[self._columna][self._fila] == "O"):
+                    self._ocount += 1
+            if self._ocount == 4:
+                GanaPierde.ow()
+#Validacion 4 en linea por fila
+    def fila_check(self):
+        for self._columna in range(5):
+            self._xcount = 0
+            for self._fila in range(6):
+                if (self._grid[self._columna][self._fila] == "X"):
+                    self._xcount += 1
+                if self._xcount == 4:
+                    GanaPierde.xw()
+        for self._columna in range(5):
+            self._ocount = 0
+            for self._fila in range(6):
+                if (self._grid[self._columna][self._fila] == "O"):
+                    self._ocount += 1
+                if self._ocount == 4:
+                    GanaPierde.ow()
+#validar todo
+    def check_all(self):
+        Check.columna_check()
+        Check.fila_check()
+
+
+class GanaPierde():
 
 #Gana O
 
-def ow():
-    cls()
-    printsespacios()
-    print("O, Wins!".center(16))
-    printsespacios()
-    gw = True
+    def __init__(self,gw):
+
+        self._gw = gw
+
+
+    def ow(self):
+        cls()
+        Grafics.printsespacios()
+        print("O, Wins!".center(16))
+        Grafics.printsespacios()
+        gw = True
 
 # Gana X
-def xw():
-    cls()
-    printsespacios()
-    print("X, Wins!".center(16))
-    printsespacios()
-    gw = True
+    def xw(self):
+        cls()
+        Grafics.printsespacios()
+        print("X, Wins!".center(16))
+        Grafics.printsespacios()
+        gw = True
 
-#Tablero
 
-grid = [['.', '.', '.', '.', '.', '.'],
-        ['.', '.', '.', '.', '.', '.'],
-        ['.', '.', '.', '.', '.', '.'],
-        ['.', '.', '.', '.', '.', '.'],
-        ['.', '.', '.', '.', '.', '.']]
-info = [['==+===+===+===+===+=='],
-        ['1', '2', '3', '4', '5', '6']]
 
 class Sudoku():
 
-    while True:
-        if gw == True:
-            break
-        else:
-            prints()
-            fila = int(input("X, column: "))
-            fila -= 1
-            if 0 > fila or fila > 6:
-                continue
+    
+    def juego(self):
+
+        while True:
+            if gw == True:
+                break
             else:
-                for x in range(4, -1, -1):
-                    if grid[x][fila] == '.':
-                       grid[x][fila] = 'X'
-                       break
-            prints()
-            fila = int(input("O, column: "))
-            fila -= 1
-            if 0 > fila or fila > 6:
-                continue
-            else:
-                for x in range(4, -1, -1):
-                    if grid[x][fila] == '.':
-                       grid[x][fila] = 'O'
-                       break
+                Grafics.prints
+                fila = int(input("X, column: "))
+                fila -= 1
+                if 0 > fila or fila > 6:
+                    continue
+                else:
+                    for x in range(4, -1, -1):
+                        if Grafics.grid[x][fila] == '.':
+                        Grafics.grid[x][fila] = 'X'
+                        break
+                Grafics.prints
+                fila = int(input("O, column: "))
+                fila -= 1
+                if 0 > fila or fila > 6:
+                    continue
+                else:
+                    for x in range(4, -1, -1):
+                        if Grafics.grid[x][fila] == '.':
+                        Grafics.grid[x][fila] = 'O'
+                        break
 
 if __name__=='__main__':
     Sudoku
