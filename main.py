@@ -1,40 +1,29 @@
-from juego import *
 
-class Main(Grafics,Check,GanaPierde):
-    
-    def juego(self):
+from cuatrolinea import Cuatro_Linea
+from cuatrolinea import *
 
+def play():
+    juego = Cuatro_Linea()
+    juego.createTablero()
+    try:
         while True:
-            if GanaPierde(self._gw) == True:
-                break
-            else:
-                Grafics.prints()
-                self._fila = int(input("X, column: "))
-                self._fila -= 1
-                if 0 > self._fila or self._fila > 6:
-                    continue
-                else:
-                    for x in range(4, -1, -1):
-                        if Grafics.grid[x][self._fila] == '.':
-                            Grafics.grid[x][self._fila] = 'X'
-                            break
-                Grafics.prints()
-                self._fila = int(input("O, column: "))
-                self._fila -= 1
-                if 0 > self._fila or self._fila > 6:
-                    continue
-                else:
-                    for x in range(4, -1, -1):
-                        if Grafics.grid[x][self._fila] == '.':
-                            Grafics.grid[x][self._fila] = 'O'
-                            break
+            juego.printTab()
+            juego.turno()
+            op = int(input('Donde desea poner su ficha?? 1 - 7: '))
+            juego.añadirF(op)
+            if juego.ganador != None:
+                juego.printTab()
+                juego.imprimirWinnwer()
+                return again()
+    except Exception as e:
+        print(f'Error!: {e}')   
+
+def again():
+    eleccion = input("Revancha? [s/n] ")
+    if eleccion == "s":
+        play()
+    elif eleccion == "n":
+        return False
 
 if __name__=='__main__':
-   a = Grafics.grid and Grafics.prints() and Grafics.printsespacios()
-   print(a)
-   b = Check.check_all()
-   print(b)
-   c = GanaPierde.ow() or GanaPierde.xw()
-   print(c) 
-   d = Main.juego()
-   print(d)    
+    play()
