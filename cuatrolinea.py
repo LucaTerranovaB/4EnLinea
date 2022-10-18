@@ -48,14 +48,16 @@ class Cuatro_Linea():
             self.jugador = jugador2
         else:
             self.jugador = jugador1
-        self.cambioTurno()        
+
+        self.cambioTurno()
+        return self.jugador        
     
     def cambioTurno(self):
         if self.jugador == jugador2:
             self.ficha = ficha2
         else:
             self.ficha = ficha1
-        
+        return self.ficha        
 
     def checkganador(self, ficha):
         
@@ -107,8 +109,10 @@ class Cuatro_Linea():
         print(f'Player 1: {ficha1} | Player 2 : {ficha2}')
         if self.jugador == jugador1:
             print(f'Player 1 juega: ({ficha1})')
+            return ficha1
         else:
             print(f'Player 2 Juega: ({ficha2})')
+            return ficha2
     
     def imprimirWinnwer(self):
         print(f' {self.ganador} WINS!!!!!!!!!!')

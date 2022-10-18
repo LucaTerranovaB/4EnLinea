@@ -30,15 +30,16 @@ class Cuatro_LineUnittest(unittest.TestCase):
 
     def test_cambioPlayer(self):
         juego = Cuatro_Linea()
-        pass
+        self.assertEqual(juego.cambioPlayer(),2)
 
     def test_cambioTurno(self):
         juego = Cuatro_Linea()
-        pass
+        self.assertEqual(juego.cambioTurno(),"X")
 
     def test_checkganador_1(self):
         juego = Cuatro_Linea()
-        pass
+        juego.checkganador(juego.ganador)
+        self.assertEqual(juego.checkganador(juego.ganador),jugador1)
 
     def test_checkganador_2(self):
         juego = Cuatro_Linea()
@@ -52,14 +53,10 @@ class Cuatro_LineUnittest(unittest.TestCase):
         juego = Cuatro_Linea()
         pass
 
-    def test_printTab(self):
-        juego = Cuatro_Linea()
-        pass
-
     def test_turno(self):
         juego = Cuatro_Linea()
-        pass
-          
+        self.assertEqual(juego.turno(),"X")
+        
 
 if __name__=='__main__':
     
