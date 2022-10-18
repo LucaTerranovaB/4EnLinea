@@ -70,6 +70,15 @@ class Cuatro_Linea():
                 if self.tablero[j][i] == ficha and self.tablero[j+1][i] == ficha and self.tablero[j+2][i] == ficha and self.tablero[j+3][i] == ficha:
                     return True
                     
+        for i in range(self.columnas):
+            for j in range(self.filas - 3):
+                if self.tablero[j][i] == ficha and self.tablero[j+1][i+1] == ficha and self.tablero[j+2][i+2] == ficha and self.tablero[j+3][i+3] == ficha:
+                    return True
+        
+        for i in range(self.columnas):
+            for j in range(self.filas - 3):
+                if self.tablero[j][i] == ficha and self.tablero[j-1][i-1] == ficha and self.tablero[j-2][i-2] == ficha and self.tablero[j-3][i-3] == ficha:
+                    return True
                 
         return False
     
