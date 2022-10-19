@@ -39,16 +39,11 @@ class Cuatro_LineUnittest(unittest.TestCase):
     #Verifica ganador jugador 1 horizontalmente
 
     def test_checkganador_1(self):
+        entradas=[1,0,1,0,1,0,1]
         juego = Cuatro_Linea()
         juego.createTablero()
-        juego.añadirF(1)     
-        juego.añadirF(0)
-        juego.añadirF(1)
-        juego.añadirF(0)
-        juego.añadirF(1)
-        juego.añadirF(0)
-        juego.añadirF(1)
-        
+        for i in range(len(entradas)):
+            juego.añadirF(entradas[i])
         self.assertEqual(juego.ganador,1)
 
 
