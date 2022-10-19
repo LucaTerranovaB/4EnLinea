@@ -41,6 +41,8 @@ class Cuatro_LineUnittest(unittest.TestCase):
         juego.checkganador(juego.ganador)
         self.assertEqual(juego.checkganador(juego.ganador),jugador1)
 
+        
+
     def test_checkganador_2(self):
         juego = Cuatro_Linea()
         pass
