@@ -36,24 +36,57 @@ class Cuatro_LineUnittest(unittest.TestCase):
         juego = Cuatro_Linea()
         self.assertEqual(juego.cambioTurno(),"X")
 
+    #Verifica ganador jugador 1 horizontalmente
+
     def test_checkganador_1(self):
         juego = Cuatro_Linea()
-        juego.checkganador(juego.ganador)
-        self.assertEqual(juego.checkganador(juego.ganador),jugador1)
-
+        juego.createTablero()
+        juego.añadirF(1)     
+        juego.añadirF(0)
+        juego.añadirF(1)
+        juego.añadirF(0)
+        juego.añadirF(1)
+        juego.añadirF(0)
+        juego.añadirF(1)
         
+        self.assertEqual(juego.ganador,1)
 
+
+    #Verifica ganador jugador 1 verticalmente
     def test_checkganador_2(self):
+        
         juego = Cuatro_Linea()
-        pass
+        juego.createTablero()
+        juego.añadirF(0)     
+        juego.añadirF(1)
+        juego.añadirF(0)
+        juego.añadirF(1)
+        juego.añadirF(0)
+        juego.añadirF(1)
+        juego.añadirF(0)
+        
+        self.assertEqual(juego.ganador,1)
 
     def test_checkganador_3(self):
         juego = Cuatro_Linea()
-        pass
+        juego.createTablero()
+        juego.añadirF(0)
+        juego.añadirF(1)
+        juego.añadirF(1)
+        juego.añadirF(2)
+        juego.añadirF(0)
+        juego.añadirF(2)
+        juego.añadirF(2)
+        juego.añadirF(3)
+        juego.añadirF(3)
+        juego.añadirF(3)
+        juego.añadirF(3)
+        self.assertEqual(juego.tablero[7][0], 'X')
+        self.assertEqual(juego.tablero[6][1], 'X')
+        self.assertEqual(juego.tablero[5][2], 'X')
+        self.assertEqual(juego.tablero[4][3], 'X')
 
-    def test_checkganador_4(self):
-        juego = Cuatro_Linea()
-        pass
+   
 
     def test_turno(self):
         juego = Cuatro_Linea()
