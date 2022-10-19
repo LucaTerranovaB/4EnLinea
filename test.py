@@ -81,10 +81,10 @@ class Cuatro_LineUnittest(unittest.TestCase):
         juego.añadirF(3)
         juego.añadirF(3)
         juego.añadirF(3)
-        self.assertEqual(juego.tablero[7][0], 'X')
-        self.assertEqual(juego.tablero[6][1], 'X')
-        self.assertEqual(juego.tablero[5][2], 'X')
-        self.assertEqual(juego.tablero[4][3], 'X')
+        self.assertEqual(juego.tablero[4][3], 'O')
+        self.assertEqual(juego.tablero[5][2], 'O')
+        self.assertEqual(juego.tablero[6][1], 'O')
+        self.assertEqual(juego.tablero[7][0], 'O')
 
    
 
